@@ -2,8 +2,10 @@
   "extends": "@tsconfig/recommended/tsconfig.json",
   "compilerOptions": {
     "composite": false,
+    "declaration": true,
     "newLine": "lf",
-    "rootDir": "."
+    "rootDir": ".",
+    "sourceMap": true
   },
   "files": [
     "index.ts"
