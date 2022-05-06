@@ -15,10 +15,10 @@ export class ObjectNode<T extends Object> {
     tree,
     childNodes,
     parentNode,
-    value,
+    value
   }: { tree: ObjectTree<T> } & Pick<
     ObjectNode<T>,
-    "childNodes" | "parentNode" | "value"
+    'childNodes' | 'parentNode' | 'value'
   >) {
     this.#tree = tree;
     this.childNodes = childNodes;
@@ -170,7 +170,7 @@ export class ObjectNode<T extends Object> {
       childNodes: [],
       parentNode: this,
       tree: this.#tree,
-      value,
+      value
     });
 
     this.#tree._add(on);
@@ -202,7 +202,7 @@ export class ObjectTree<T extends Object> {
     tree: this,
     childNodes: [],
     parentNode: null,
-    value: null,
+    value: null
   });
 
   find(value: NonNullable<T>): ObjectNode<T> | null {
