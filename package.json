@@ -11,6 +11,8 @@
   },
   "private": true,
   "scripts": {
+    "fix": "run-s fix:*",
+    "fix:fixpack": "npx fixpack",
     "fix:prettier": "prettier --write index.ts"
   }
 }
