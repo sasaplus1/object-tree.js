@@ -5,13 +5,21 @@
 type Id = Symbol;
 
 export class ObjectNode<T extends Object> {
-  #tree: ObjectTree<T>
+  #tree: ObjectTree<T>;
   childNodes: ObjectNode<T>[];
   id: Id;
   parentNode: ObjectNode<T> | null;
   value: T | null;
 
-  constructor({ tree, childNodes, parentNode, value }: { tree: ObjectTree<T> } & Pick<ObjectNode<T>, "childNodes" | "parentNode" | "value"> ) {
+  constructor({
+    tree,
+    childNodes,
+    parentNode,
+    value,
+  }: { tree: ObjectTree<T> } & Pick<
+    ObjectNode<T>,
+    "childNodes" | "parentNode" | "value"
+  >) {
     this.#tree = tree;
     this.childNodes = childNodes;
     this.id = Symbol();
@@ -30,14 +38,14 @@ export class ObjectNode<T extends Object> {
     const index = siblings.indexOf(this);
 
     if (index !== -1) {
-      const ons = values.map(value => this.#addToObjectTree(value));
+      const ons = values.map((value) => this.#addToObjectTree(value));
 
       siblings.splice(index + 1, 0, ...ons);
     }
   }
 
   append(...values: NonNullable<T>[]): void {
-    const ons = values.map(value => this.#addToObjectTree(value));
+    const ons = values.map((value) => this.#addToObjectTree(value));
 
     this.childNodes.push(...ons);
   }
@@ -53,7 +61,7 @@ export class ObjectNode<T extends Object> {
     const index = siblings.indexOf(this);
 
     if (index !== -1) {
-      const ons = values.map(value => this.#addToObjectTree(value));
+      const ons = values.map((value) => this.#addToObjectTree(value));
 
       siblings.splice(index, 0, ...ons);
     }
@@ -101,9 +109,7 @@ export class ObjectNode<T extends Object> {
   }
 
   insertBefore(newValue: NonNullable<T>, referenceValue: NonNullable<T>): void {
-    const {
-      parentNode
-    } = this;
+    const { parentNode } = this;
 
     if (parentNode === null) {
       return;
@@ -128,16 +134,13 @@ export class ObjectNode<T extends Object> {
   }
 
   prepend(...values: NonNullable<T>[]): void {
-    const ons = values.map(value => this.#addToObjectTree(value));
+    const ons = values.map((value) => this.#addToObjectTree(value));
 
     this.childNodes.unshift(...ons);
   }
 
   remove(): void {
-    const {
-      childNodes,
-      parentNode,
-    } = this;
+    const { childNodes, parentNode } = this;
 
     this.#tree._delete(this);
 
@@ -211,7 +214,7 @@ export class ObjectTree<T extends Object> {
 
     const on = this.#references.get(id);
 
-    return (on !== undefined) ? on : null;
+    return on !== undefined ? on : null;
   }
 
   has(value: NonNullable<T>): boolean {
