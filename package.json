@@ -11,8 +11,14 @@
   },
   "private": true,
   "scripts": {
+    "build": "tsc",
     "fix": "run-s fix:*",
     "fix:fixpack": "npx fixpack",
-    "fix:prettier": "prettier --write index.ts"
+    "fix:prettier": "prettier --write index.ts",
+    "lint": "run-s lint:*",
+    "lint:fixpack": "npx fixpack --dryRun",
+    "lint:prettier": "prettier --check index.ts index.test.ts",
+    "lint:tsc": "tsc --noEmit",
+    "watch": "tsc --watch"
   }
 }
