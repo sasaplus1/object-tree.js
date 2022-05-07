@@ -13,7 +13,7 @@ var __classPrivateFieldGet = (this && this.__classPrivateFieldGet) || function (
     if (typeof state === "function" ? receiver !== state || !f : !state.has(receiver)) throw new TypeError("Cannot read private member from an object whose class did not declare it");
     return kind === "m" ? f : kind === "a" ? f.call(receiver) : f ? f.value : state.get(receiver);
 };
-var _ObjectNode_instances, _ObjectNode_tree, _ObjectNode_addToObjectTree, _ObjectNode_getSibling, _ObjectTree_references, _ObjectTree_dereferences;
+var _ObjectNode_instances, _ObjectNode_tree, _ObjectNode_addToObjectTree, _ObjectNode_getSibling, _ObjectNode_insertAdjacent, _ObjectTree_references, _ObjectTree_dereferences;
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.ObjectTree = exports.ObjectNode = void 0;
 class ObjectNode {
@@ -27,32 +27,14 @@ class ObjectNode {
         this.value = value;
     }
     after(...values) {
-        const { parentNode } = this;
-        if (parentNode === null) {
-            return;
-        }
-        const siblings = parentNode.childNodes;
-        const index = siblings.indexOf(this);
-        if (index !== -1) {
-            const ons = values.map((value) => __classPrivateFieldGet(this, _ObjectNode_instances, "m", _ObjectNode_addToObjectTree).call(this, value));
-            siblings.splice(index + 1, 0, ...ons);
-        }
+        __classPrivateFieldGet(this, _ObjectNode_instances, "m", _ObjectNode_insertAdjacent).call(this, 1, ...values);
     }
     append(...values) {
         const ons = values.map((value) => __classPrivateFieldGet(this, _ObjectNode_instances, "m", _ObjectNode_addToObjectTree).call(this, value));
         this.childNodes.push(...ons);
     }
     before(...values) {
-        const { parentNode } = this;
-        if (parentNode === null) {
-            return;
-        }
-        const siblings = parentNode.childNodes;
-        const index = siblings.indexOf(this);
-        if (index !== -1) {
-            const ons = values.map((value) => __classPrivateFieldGet(this, _ObjectNode_instances, "m", _ObjectNode_addToObjectTree).call(this, value));
-            siblings.splice(index, 0, ...ons);
-        }
+        __classPrivateFieldGet(this, _ObjectNode_instances, "m", _ObjectNode_insertAdjacent).call(this, 0, ...values);
     }
     contains(value) {
         if (value === this.value) {
@@ -141,6 +123,17 @@ _ObjectNode_tree = new WeakMap(), _ObjectNode_instances = new WeakSet(), _Object
     const index = siblings.indexOf(this);
     const sibling = siblings[index + direction];
     return sibling || null;
+}, _ObjectNode_insertAdjacent = function _ObjectNode_insertAdjacent(direction, ...values) {
+    const { parentNode } = this;
+    if (parentNode === null) {
+        return;
+    }
+    const siblings = parentNode.childNodes;
+    const index = siblings.indexOf(this);
+    if (index !== -1) {
+        const ons = values.map((value) => __classPrivateFieldGet(this, _ObjectNode_instances, "m", _ObjectNode_addToObjectTree).call(this, value));
+        siblings.splice(index + direction, 0, ...ons);
+    }
 };
 class ObjectTree {
     constructor() {
