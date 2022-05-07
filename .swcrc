@@ -1,0 +1,21 @@
+{
+  "env": {
+    "targets": {
+      "chrome": "100",
+      "firefox": "100"
+    }
+  },
+  "jsc": {
+    "parser": {
+      "syntax": "typescript",
+      "tsx": false,
+      "decorators": false,
+      "dynamicImport": false
+    },
+    "target": "es2015"
+  },
+  "module": {
+    "type": "umd",
+    "globals": {}
+  }
+}
