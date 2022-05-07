@@ -28,20 +28,7 @@ export class ObjectNode<T extends Object> {
   }
 
   after(...values: NonNullable<T>[]): void {
-    const { parentNode } = this;
-
-    if (parentNode === null) {
-      return;
-    }
-
-    const siblings = parentNode.childNodes;
-    const index = siblings.indexOf(this);
-
-    if (index !== -1) {
-      const ons = values.map((value) => this.#addToObjectTree(value));
-
-      siblings.splice(index + 1, 0, ...ons);
-    }
+    this.#insertAdjacent(1, ...values);
   }
 
   append(...values: NonNullable<T>[]): void {
@@ -51,20 +38,7 @@ export class ObjectNode<T extends Object> {
   }
 
   before(...values: NonNullable<T>[]): void {
-    const { parentNode } = this;
-
-    if (parentNode === null) {
-      return;
-    }
-
-    const siblings = parentNode.childNodes;
-    const index = siblings.indexOf(this);
-
-    if (index !== -1) {
-      const ons = values.map((value) => this.#addToObjectTree(value));
-
-      siblings.splice(index, 0, ...ons);
-    }
+    this.#insertAdjacent(0, ...values);
   }
 
   contains(value: NonNullable<T>): boolean {
@@ -191,6 +165,23 @@ export class ObjectNode<T extends Object> {
     const sibling = siblings[index + direction];
 
     return sibling || null;
+  }
+
+  #insertAdjacent(direction: 0 | 1, ...values: NonNullable<T>[]): void {
+    const { parentNode } = this;
+
+    if (parentNode === null) {
+      return;
+    }
+
+    const siblings = parentNode.childNodes;
+    const index = siblings.indexOf(this);
+
+    if (index !== -1) {
+      const ons = values.map((value) => this.#addToObjectTree(value));
+
+      siblings.splice(index + direction, 0, ...ons);
+    }
   }
 }
 
