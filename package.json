@@ -20,7 +20,7 @@
     "dist/**/*"
   ],
   "main": "./dist/cjs/index.js",
-  "module": "./dist/umd/index.js",
+  "module": "./dist/esm/index.js",
   "mocha": {
     "require": "ts-node/register",
     "extensions": [
@@ -46,7 +46,8 @@
   },
   "scripts": {
     "build": "run-s build:*",
-    "build:cjs": "tsc -p tsconfig.main.json",
+    "build:cjs": "tsc -p tsconfig.main.json -m commonjs --outDir dist/cjs",
+    "build:esm": "tsc -p tsconfig.main.json -m esnext --outDir dist/esm",
     "build:umd": "swc index.ts -d dist/umd -s",
     "fix": "run-s fix:*",
     "fix:fixpack": "npx fixpack",
