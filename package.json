@@ -45,7 +45,9 @@
     "url": "https://github.com/sasaplus1/object-tree.js.git"
   },
   "scripts": {
-    "build": "tsc -p tsconfig.main.json",
+    "build": "run-s build:*",
+    "build:cjs": "tsc -p tsconfig.main.json",
+    "build:umd": "swc index.ts -d dist/umd -s",
     "fix": "run-s fix:*",
     "fix:fixpack": "npx fixpack",
     "fix:prettier": "prettier --write index.ts index.test.ts",

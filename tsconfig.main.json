@@ -3,7 +3,9 @@
   "compilerOptions": {
     "composite": false,
     "declaration": true,
+    "declarationDir": ".",
     "newLine": "lf",
+    "outDir": "dist/cjs",
     "rootDir": ".",
     "sourceMap": true
   },
