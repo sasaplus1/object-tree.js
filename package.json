@@ -4,6 +4,8 @@
   "version": "1.0.0",
   "author": "sasa+1 <sasaplus1@gmail.com>",
   "devDependencies": {
+    "@swc/cli": "^0.1.57",
+    "@swc/core": "^1.2.178",
     "@tsconfig/recommended": "^1.0.1",
     "@types/mocha": "^9.1.1",
     "@types/node": "^17.0.31",
