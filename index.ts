@@ -41,6 +41,7 @@ export class ObjectNode<T extends Object> {
     this.#insertAdjacent(0, ...values);
   }
 
+  // TODO: find from value object to parent
   contains(value: NonNullable<T>): boolean {
     if (value === this.value) {
       return true;
